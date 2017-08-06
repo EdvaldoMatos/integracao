@@ -17,6 +17,7 @@
       </nodes>
       <nodes xmi:type="ComIbmRESTRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="266,39" definitionType="swagger_20" definitionFile="swagger.json" operationName="getEndereco" acceptCompressedResponses="true">
         <translation xmi:type="utility:ConstantString" string="REST Request"/>
+        <parameters name="cep" expression="$LocalEnvironment/HTTP/Input/QueryString/cep"/>
         <parameters name="cep" expression="$LocalEnvironment/REST/Input/Operation"/>
       </nodes>
       <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="405,58" mappingExpression="msl://{default}#getEndereco_Mapping">
