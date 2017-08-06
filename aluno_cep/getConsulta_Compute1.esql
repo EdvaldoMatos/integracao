@@ -1,0 +1,11 @@
+CREATE COMPUTE MODULE getConsulta_Compute1
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.JSON.Data.endereco = InputLocalEnvironment.JSON.Data.endereco;
+		declare vlr integer InputRoot.SOAP.Body.ns:AddResponse.ns:AddResult;
+		set OutputRoot.JSON.Data.endereco.calculado = vlr;
+		
+		RETURN TRUE;
+	END;
+
+END MODULE;

@@ -1,0 +1,51 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "title" : "aluno_cep",
+    "version" : "1.0.0",
+    "description" : "aluno_cep"
+  },
+  "paths" : {
+    "/cep/consulta" : {
+      "get" : {
+        "operationId" : "getConsulta",
+        "responses" : {
+          "200" : {
+            "description" : "The operation was successful.",
+            "schema" : {
+              "$ref" : "#/definitions/Endereco"
+            }
+          }
+        },
+        "produces" : [ "application/json" ],
+        "description" : "Retrieve consulta",
+        "parameters" : [ {
+          "name" : "cep",
+          "in" : "query",
+          "type" : "string",
+          "description" : "Cep Consultado"
+        } ]
+      }
+    }
+  },
+  "basePath" : "/aluno_cep/v1",
+  "definitions" : {
+    "Endereco" : {
+      "type" : "object",
+      "properties" : {
+        "logradouro" : {
+          "type" : "string"
+        },
+        "cidade" : {
+          "type" : "string"
+        },
+        "uf" : {
+          "type" : "string"
+        },
+        "calculado" : {
+          "type" : "number"
+        }
+      }
+    }
+  }
+}

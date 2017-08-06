@@ -1,0 +1,51 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "title" : "Estudo de Barramento",
+    "version" : "1.0.0",
+    "description" : "lab_br_estudo_rs"
+  },
+  "paths" : {
+    "/endereco" : {
+      "get" : {
+        "operationId" : "getEndereco",
+        "responses" : {
+          "200" : {
+            "description" : "The operation was successful.",
+            "schema" : {
+              "$ref" : "#/definitions/Endereco"
+            }
+          }
+        },
+        "produces" : [ "application/json" ],
+        "description" : "Retrieve endereco",
+        "parameters" : [ {
+          "name" : "cep",
+          "in" : "query",
+          "type" : "string",
+          "required" : true
+        } ]
+      }
+    }
+  },
+  "basePath" : "/lab_br_estudo_rs/v1",
+  "definitions" : {
+    "Endereco" : {
+      "type" : "object",
+      "properties" : {
+        "logradouro" : {
+          "type" : "string"
+        },
+        "bairro" : {
+          "type" : "string"
+        },
+        "localidade" : {
+          "type" : "string"
+        },
+        "uf" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}

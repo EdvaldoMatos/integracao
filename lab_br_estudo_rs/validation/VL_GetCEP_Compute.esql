@@ -1,0 +1,16 @@
+BROKER SCHEMA validation
+
+CREATE COMPUTE MODULE VL_GetCEP_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL validarCep();
+		-- CALL CopyEntireMessage();
+		RETURN TRUE;
+	END;
+	CREATE PROCEDURE validarCep() BEGIN
+		SET OutputRoot = InputRoot;
+		if LENGTH(InputLocalEnvironment.REST.Input.Parameters.cep) <> 8 then 
+			THROW USER EXCEPTION MESSAGE 400 values (601, 'Cep informado invalido!');
+		end if;
+	END;
+END MODULE;
