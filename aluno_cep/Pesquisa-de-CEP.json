@@ -1,0 +1,98 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "title" : "Pesquisa de CEP",
+    "description" : "Informe um cep e obtenha o endereço",
+    "version" : "1.0.0"
+  },
+  "host" : "minhaempresa.com.br",
+  "schemes" : [ "http" ],
+  "basePath" : "/v1",
+  "produces" : [ "application/json" ],
+  "paths" : {
+    "/cep" : {
+      "get" : {
+        "summary" : "CEPs",
+        "description" : "Pesquisa de ceps.\n",
+        "parameters" : [ {
+          "name" : "cep",
+          "in" : "query",
+          "description" : "numero do cap sem traço Exemplo 07555001.",
+          "required" : true,
+          "type" : "number",
+          "format" : "double"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Um endereço completo",
+            "schema" : {
+              "type" : "object",
+              "items" : {
+                "$ref" : "#/definitions/Endereco"
+              }
+            }
+          },
+          "default" : {
+            "description" : "Unexpected error",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "Endereco" : {
+      "type" : "object",
+      "properties" : {
+        "cep" : {
+          "type" : "string",
+          "description" : "Identificador unico de CEP."
+        },
+        "logradouro" : {
+          "type" : "string",
+          "description" : "Nome da Avenida, Rua e etc."
+        },
+        "bairro" : {
+          "type" : "string",
+          "description" : "nome do bairro."
+        },
+        "localidade" : {
+          "type" : "string",
+          "description" : "Municipio."
+        },
+        "uf" : {
+          "type" : "string",
+          "description" : "Estado."
+        },
+        "unidade" : {
+          "type" : "string",
+          "description" : "Não sei que e isso."
+        },
+        "ibge" : {
+          "type" : "string",
+          "description" : "Codigo de localização do IBGE."
+        },
+        "gia" : {
+          "type" : "string",
+          "description" : "Codigo de referenica do IBGE."
+        }
+      }
+    },
+    "Error" : {
+      "type" : "object",
+      "properties" : {
+        "code" : {
+          "type" : "string"
+        },
+        "message" : {
+          "type" : "string"
+        },
+        "detail" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+DECLARE ns NAMESPACE 'http://tempuri.org/';
+CREATE COMPUTE MODULE getConsulta_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL ajustaEndereco();
+		--CALL CopyEntireMessage();
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN		
+		SET OutputRoot = InputRoot;
+	END;
+
+	CREATE PROCEDURE ajustaEndereco() BEGIN
+		CREATE FIELD InputRoot.JSON.Data;
+		DECLARE cepConsultado REFERENCE TO InputRoot.JSON.Data;
+		
+		CREATE FIELD OutputLocalEnvironment.JSON.Data.endereco;
+		DECLARE endereco REFERENCE TO OutputLocalEnvironment.JSON.Data.endereco;
+		
+		set endereco.logradouro = cepConsultado.logradouro;
+		set endereco.cidade = cepConsultado.localidade;
+		set endereco.uf = cepConsultado.uf;
+		
+		DECLARE tns NAMESPACE 'http:///tempuri.org/';
+		CREATE LASTCHILD OF OutputRoot DOMAIN('XMLNSC');
+		SET OutputRoot.XMLNSC.ns:Add.ns:intA = cast(cepConsultado.ibge as INTEGER);
+		SET OutputRoot.XMLNSC.ns:Add.ns:intB = cast(cepConsultado.gia as INTEGER);
+		
+	END;
+
+END MODULE;
