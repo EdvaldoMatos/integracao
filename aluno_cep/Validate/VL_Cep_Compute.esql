@@ -36,3 +36,4 @@ CREATE COMPUTE MODULE VL_Cep_Compute
 		set OutputLocalEnvironment = InputLocalEnvironment;
 	END;
 END MODULE;
+
